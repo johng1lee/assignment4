@@ -15,8 +15,14 @@ public class Hole implements Comparable{
     public int getStartIndex(){
 	return startIndex;
     }
+    public void setStartIndex(int newStartIndex){
+	startIndex = newStartIndex;
+    }
     public int getEndIndex(){
 	return endIndex;
+    }
+    public void setEndIndex(int newEndIndex){
+	endIndex = newEndIndex;
     }
     public void mergeHole(Hole otherHole){
 	int difference;

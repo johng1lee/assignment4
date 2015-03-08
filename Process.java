@@ -3,11 +3,15 @@ public class Process{
     private int duration;
     private int timeLeft;
     private int id;
+    private int memoryStartIndex;
+    private int memoryEndIndex;
     public Process(int size, int duration, int id){
 	this.size = size;
 	this.duration = duration;
 	timeLeft = duration;
 	this.id = id;
+	memoryEndIndex = 0;
+	memoryStartIndex = 0;
     }
 
     public int getSize(){
@@ -18,6 +22,18 @@ public class Process{
     }
     public int getID(){
 	return id;
+    }
+    public void setMemoryStartIndex(int startIndex){
+	memoryStartIndex = startIndex;
+    }
+    public void setMemoryEndIndex(int endIndex){
+	memoryEndIndex = endIndex;
+    }
+    public int getMemoryStartIndex(){
+	return memoryStartIndex;
+    }
+    public int getMemoryEndIndex(){
+	return memoryEndIndex;
     }
     public void decrementTime(){
 	timeLeft--;
