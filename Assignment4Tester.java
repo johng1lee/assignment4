@@ -34,8 +34,10 @@ public class Assignment4Tester{
 	System.out.println("---------------------");
     }
 
+    public List<Process> getProcesses(){
+	return processes;
+    }
     public static void main(String[] args){
 	Assignment4Tester generator = new Assignment4Tester(50);
-	generator.generateNewProcesses();
     }
 }
