@@ -15,8 +15,8 @@ public class WorstFit{
     ArrayList<Hole> holes;
     public WorstFit(List<Process> allProcesses){
 	this.allProcesses = allProcesses;
-	memory = new ArrayList<String>(100);
-	for(int i=0;i<100;i++){
+	memory = new ArrayList<String>();
+	for(int i=0;i<MEMORY_SIZE;i++){
 	    memory.add(".");
 	}
 	//Track processes and holes
@@ -28,19 +28,35 @@ public class WorstFit{
 
     public void beginSwapping(){
 	int time = 0;
-	Process readyProcess;
+	boolean isProcessServed = true;
+	Process readyProcess = null;
 	Iterator<Process> iterRunningProcesses;
 	while(time <= RUN_TIME){
+	    if(allProcesses.size()<=0){
+		System.out.println("No more processes");
+		return;
+	    }
+	    if(isProcessServed){
 	    readyProcess = allProcesses.remove(0);
+	    }
+	    if(readyProcess == null){
+		return;
+	    }
+	    System.out.println(readyProcess);
 	    Hole largestHole = holes.get(0);
 	    if(readyProcess.getSize()<=largestHole.getSize()){
 		runningProcesses.add(readyProcess);
 		readyProcess.setMemoryStartIndex(largestHole.getStartIndex());
-		readyProcess.setMemoryEndIndex(largestHole.getStartIndex() + readyProcess.getSize() - 1)
-		for(int i=readyProcess.getMemoryStartIndex();i<=readyProcess.getMemoryEndIndex;i++){
+		readyProcess.setMemoryEndIndex(largestHole.getStartIndex() + readyProcess.getSize() - 1);
+		for(int i=readyProcess.getMemoryStartIndex();i<=readyProcess.getMemoryEndIndex();i++){
 		    memory.set(i,Integer.toString(readyProcess.getID()));
 		}
 		largestHole.setStartIndex(largestHole.getStartIndex() + readyProcess.getSize());
+		printMemory();
+		isProcessServed = true;
+	    }
+	    else{
+		isProcessServed = false;
 	    }
 	    Process completedProcess = null;
 	    Process evaluateProcess = null;
@@ -50,26 +66,28 @@ public class WorstFit{
 		evaluateProcess.decrementTime();//decrement time
 		if(evaluateProcess.isDone()){
 		    for(int i=evaluateProcess.getMemoryStartIndex();i<=evaluateProcess.getMemoryEndIndex();i++){
-			memory.set(i,".")
+			memory.set(i,".");
 		    }
 		    iterRunningProcesses.remove();//remove completed processes from running process list
-		    holes.add(new Hole(evaluateProcess.getMemoryStartIndex(),evaluateProcess.getMemoryEndIndex()))
+		    holes.add(new Hole(evaluateProcess.getMemoryStartIndex(),evaluateProcess.getMemoryEndIndex()));
+		    printMemory();
 		}
 	    }
 	    Collections.sort(holes,new Comparator<Hole>(){
-		    public int compare(Object h1, Object h2){
-			return ((Integer)((Hole)h1.getStartIndex())).compareTo(((Integer) ((Hole)h1.getStartIndex())));
+		    public int compare(Hole h1, Hole h2){
+			return ((Integer)h1.getStartIndex()).compareTo(((Integer)h2.getStartIndex()));
 		    }
 		});
 	    mergeHoles();
+	    Collections.sort(holes);
 	    time++;
 	}
     }
     private void mergeHoles(){
-	ListIterator iterHoles = holes.listIterator();
+	ListIterator<Hole> iterHoles = holes.listIterator();
 	boolean first = true;
-	Hole previous;
-	Hole current;
+	Hole previous = null;
+	Hole current = null;
 	if(holes.size() < 2){
 	    return;
 	}
@@ -80,27 +98,24 @@ public class WorstFit{
 	    }
 	    else{
 		current = iterHoles.next();
+		if(previous == null || current == null){return;}
 		if(previous.getEndIndex()+1 == current.getStartIndex()){
 		    previous.mergeHole(current);
-		    iterHoles.remove()
+		    iterHoles.remove();
 		}
 	    }
 	}
     }
-    public void printSize(){
-	System.out.println(largestHoleSize);
-    }
-    public void printHoleLocations(){
-	Iterator<Integer> keys = holeLocations.keySet().iterator();
-	int key;
-	while(keys.hasNext()){
-	    key = keys.next();
-	    System.out.printf("Key: %d, Value: %s\n",key,holeLocations.get(key).toString());
+    private void printHoles(){
+	System.out.println("------------HOLES----------");
+	for(Hole h: holes){
+	    System.out.println(h);
 	}
     }
-    public static void main(String[] args){
-	WorstFit test = new WorstFit(new ArrayList<Process>());
-	test.printHoleLocations();
-	
+    private void printMemory(){
+	for(String s:memory){
+	    System.out.print(s);
+	}
+	System.out.println();
     }
 }

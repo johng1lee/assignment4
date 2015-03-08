@@ -38,6 +38,8 @@ public class Assignment4Tester{
 	return processes;
     }
     public static void main(String[] args){
-	Assignment4Tester generator = new Assignment4Tester(50);
+	Assignment4Tester generator = new Assignment4Tester(10);
+	WorstFit wf = new WorstFit(generator.getProcesses());
+	wf.beginSwapping();
     }
 }
