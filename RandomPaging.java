@@ -6,17 +6,55 @@ public class RandomPaging{
     private final int DISK_SIZE = 10;
     private final int MEMORY_SIZE = 4;
     private List<Integer> pageList;
+    private final int[] randomIndex = new int[MEMORY_SIZE];
     
     public RandomPaging(List<Integer> pageList){
 	this.pageList = pageList;
 	physicalMemory = new ArrayList<Integer>();
 	for(int i=0;i<MEMORY_SIZE;i++){
 	    physicalMemory.add(null);
+	    randomIndex[i] = i;
 	}
 	disk = new ArrayList<Integer>();
 	for(int i=0;i<DISK_SIZE;i++){
 	    disk.add(i);
 	}
     }
-    
+
+    public void beginPaging(){
+	Random randomPagePicker = new Random();
+	ListIterator<Integer> iterList = pageList.listIterator();
+	Integer nextPage;
+	int evictIndex;
+	int countUntilFull = 0;
+	while(iterList.hasNext()){
+	    nextPage = iterList.next();
+	    System.out.printf("Page needed: %d |",nextPage);
+	    if(!physicalMemory.contains(nextPage)){
+
+		if(countUntilFull < MEMORY_SIZE){
+		    physicalMemory.set(countUntilFull,nextPage);
+		}
+		else{
+		    evictIndex = randomPagePicker.nextInt(MEMORY_SIZE);
+		    physicalMemory.set(evictIndex,nextPage);
+		    
+		}
+		countUntilFull++;
+		printMemory();
+	    }
+	    else{
+		System.out.printf("Found it! | ");
+		printMemory();
+		
+	    }
+	}
+    }
+    public void printMemory(){
+	System.out.printf("Memory: ");
+	for(int i=0;i<MEMORY_SIZE;i++){
+	    System.out.print(physicalMemory.get(i));
+	}
+	System.out.println();
+    }
 }

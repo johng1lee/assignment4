@@ -91,7 +91,7 @@ public class Assignment4Tester{
 	wf.beginSwapping();
 
 	Assignment4Tester generator1 = new Assignment4Tester(0);
-	generator1.printPages();
 	RandomPaging rp = new RandomPaging(generator1.getPages());
+	rp.beginPaging();
     }
 }
