@@ -4,7 +4,7 @@ public class Assignment4Tester{
     //SWAPPING SETUP
     private List<Process> processes;
     private int processNumber = 1;
-    private Random rGenerator = new Random(1);
+    private Random rGenerator = new Random();
     private int numProcesses;
     private final int[] processSizes = new int[]{5,11,17,31};
     private final int[] processDurations = new int[]{1,2,3,4,5};
@@ -14,8 +14,8 @@ public class Assignment4Tester{
     //PAGING SETUP
     private final int NUM_PAGE_REFERENCES = 100;
     private List<Integer> pages;
-    private Random localityGenerator = new Random(2);
-    private Random pageGenerator = new Random(3);
+    private Random localityGenerator = new Random();
+    private Random pageGenerator = new Random();
     private final int[] localPagePossibilities = new int[]{-1,0,1};
 
     public Assignment4Tester(int numProcesses){
@@ -91,9 +91,11 @@ public class Assignment4Tester{
 	return pages;
     }
     public static void main(String[] args){
-	// Assignment4Tester generator = new Assignment4Tester(40);
-	// WorstFit wf = new WorstFit(generator.getProcesses());
-	// wf.beginSwapping();
+	for(int i = 0;i<5;i++){
+	    Assignment4Tester generator = new Assignment4Tester(5);
+	    WorstFit wf = new WorstFit(generator.getProcesses());
+	    wf.beginSwapping();
+	}
 
 	// Assignment4Tester generator1 = new Assignment4Tester(0);
 	// RandomPaging rp = new RandomPaging(generator1.getPages());
@@ -107,12 +109,12 @@ public class Assignment4Tester{
 	// NextFit nf = new NextFit(generator3.getProcesses());
 	// nf.beginSwapping();
 
-	Assignment4Tester generator4 = new Assignment4Tester(0);
-	MFU mfu = new MFU(generator4.getPages());
-	mfu.beginPaging();
+	// Assignment4Tester generator4 = new Assignment4Tester(0);
+	// MFU mfu = new MFU(generator4.getPages());
+	// mfu.beginPaging();
 
-	Assignment4Tester generator5 = new Assignment4Tester(0);
-	LFU lfu = new LFU(generator5.getPages());
-	lfu.beginPaging();
+	// Assignment4Tester generator5 = new Assignment4Tester(0);
+	// LFU lfu = new LFU(generator5.getPages());
+	// lfu.beginPaging();
     }
 }
