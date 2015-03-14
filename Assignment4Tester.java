@@ -8,8 +8,8 @@ public class Assignment4Tester{
     private int numProcesses;
     private final int[] processSizes = new int[]{5,11,17,31};
     private final int[] processDurations = new int[]{1,2,3,4,5};
-    private String processNames = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private final int NUM_MAX_PROCESS = 52;
+    private String processNames = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private final int NUM_MAX_PROCESS = 62;
 
     //PAGING SETUP
     private final int NUM_PAGE_REFERENCES = 100;
