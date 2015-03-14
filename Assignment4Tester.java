@@ -91,12 +91,28 @@ public class Assignment4Tester{
 	return pages;
     }
     public static void main(String[] args){
-	Assignment4Tester generator = new Assignment4Tester(40);
-	WorstFit wf = new WorstFit(generator.getProcesses());
-	wf.beginSwapping();
+	// Assignment4Tester generator = new Assignment4Tester(40);
+	// WorstFit wf = new WorstFit(generator.getProcesses());
+	// wf.beginSwapping();
 
-	Assignment4Tester generator1 = new Assignment4Tester(0);
-	RandomPaging rp = new RandomPaging(generator1.getPages());
-	rp.beginPaging();
+	// Assignment4Tester generator1 = new Assignment4Tester(0);
+	// RandomPaging rp = new RandomPaging(generator1.getPages());
+	// rp.beginPaging();
+
+	// Assignment4Tester generator2 = new Assignment4Tester(53);
+	// FirstFit ff = new FirstFit(generator2.getProcesses());
+	// ff.beginSwapping();
+
+	// Assignment4Tester generator3 = new Assignment4Tester(53);
+	// NextFit nf = new NextFit(generator3.getProcesses());
+	// nf.beginSwapping();
+
+	Assignment4Tester generator4 = new Assignment4Tester(0);
+	MFU mfu = new MFU(generator4.getPages());
+	mfu.beginPaging();
+
+	Assignment4Tester generator5 = new Assignment4Tester(0);
+	LFU lfu = new LFU(generator5.getPages());
+	lfu.beginPaging();
     }
 }

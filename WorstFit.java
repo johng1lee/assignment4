@@ -52,6 +52,9 @@ public class WorstFit{
 		    memory.set(i,readyProcess.getID());
 		}
 		largestHole.setStartIndex(largestHole.getStartIndex() + readyProcess.getSize());
+		if (largestHole.getSize() <= 0) // testing to see if fixes error *it does fix the error with a hole of size 0 I was getting
+		    holes.remove(0);
+
 		printMemory();
 		isProcessServed = true;
 	    }
@@ -63,7 +66,7 @@ public class WorstFit{
 	    iterRunningProcesses = runningProcesses.iterator();
 	    while(iterRunningProcesses.hasNext()){
 		evaluateProcess = iterRunningProcesses.next();
-		evaluateProcess.decrementTime();//decrement time
+		evaluateProcess.decrementTime();//decrement time SHOULD THIS BE AFTER REMOVING FINISHED PROCESSES? OTHERWISE IT WILL COMPLETE PROCESSES OF DURATION 1 IMMEDIATELY
 		if(evaluateProcess.isDone()){
 		    for(int i=evaluateProcess.getMemoryStartIndex();i<=evaluateProcess.getMemoryEndIndex();i++){
 			memory.set(i,".");
@@ -102,6 +105,9 @@ public class WorstFit{
 		if(previous.getEndIndex()+1 == current.getStartIndex()){
 		    previous.mergeHole(current);
 		    iterHoles.remove();
+		}
+		else{
+		    previous = current;
 		}
 	    }
 	}

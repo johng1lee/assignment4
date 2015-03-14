@@ -34,6 +34,7 @@ public class Hole implements Comparable{
 	    System.out.println("Old size is: " + size);
 	    size = size + difference;
 	    System.out.println("New size is: " + size);
+	    System.out.printf("Start Index: %d | End Index: %d\n", startIndex, endIndex);
 	}
 	else{
 	    difference = startIndex - otherHole.getStartIndex();
@@ -41,6 +42,7 @@ public class Hole implements Comparable{
 	    System.out.println("Old size is: " + size);
 	    size = size + difference;
 	    System.out.println("New size is: " + size);
+	    System.out.printf("Start Index: %d | End Index: %d\n", startIndex, endIndex);
 	}
     }
     public int compareTo(Object hole){
@@ -50,14 +52,14 @@ public class Hole implements Comparable{
 	return "start: " + Integer.toString(startIndex) + " end: " + Integer.toString(endIndex) + " size: " + Integer.toString(size);
     }
     public static void main(String[] args){
-    	ArrayList<Hole> listH = new ArrayList<Hole>();
-    	listH.add(new Hole(0,2));
-    	listH.add(new Hole(77,79));
-    	listH.add(new Hole(100,105));
-    	listH.add(new Hole(85,90));
-    	listH.add(new Hole(10,15));
-    	System.out.println(listH.toString());
-    	Collections.sort(listH);
-    	System.out.println(listH.toString());
+    	// ArrayList<Hole> listH = new ArrayList<Hole>();
+    	// listH.add(new Hole(0,2));
+    	// listH.add(new Hole(77,79));
+    	// listH.add(new Hole(100,105));
+    	// listH.add(new Hole(85,90));
+    	// listH.add(new Hole(10,15));
+    	// System.out.println(listH.toString());
+    	// Collections.sort(listH);
+    	// System.out.println(listH.toString());
     }
 }
