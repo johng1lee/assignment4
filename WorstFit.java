@@ -49,7 +49,7 @@ public class WorstFit{
 		readyProcess.setMemoryStartIndex(largestHole.getStartIndex());
 		readyProcess.setMemoryEndIndex(largestHole.getStartIndex() + readyProcess.getSize() - 1);
 		for(int i=readyProcess.getMemoryStartIndex();i<=readyProcess.getMemoryEndIndex();i++){
-		    memory.set(i,Integer.toString(readyProcess.getID()));
+		    memory.set(i,readyProcess.getID());
 		}
 		largestHole.setStartIndex(largestHole.getStartIndex() + readyProcess.getSize());
 		printMemory();

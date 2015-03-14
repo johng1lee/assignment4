@@ -8,6 +8,8 @@ public class Assignment4Tester{
     private int numProcesses;
     private final int[] processSizes = new int[]{5,11,17,31};
     private final int[] processDurations = new int[]{1,2,3,4,5};
+    private String processNames = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private final int NUM_MAX_PROCESS = 52;
 
     //PAGING SETUP
     private final int NUM_PAGE_REFERENCES = 100;
@@ -19,6 +21,9 @@ public class Assignment4Tester{
     public Assignment4Tester(int numProcesses){
 	//SWAPPING INIT
 	this.numProcesses = numProcesses;
+	if(numProcesses > NUM_MAX_PROCESS){
+	    numProcesses = NUM_MAX_PROCESS;
+	}
 	processes = new ArrayList<Process>();
 	generateNewProcesses();
 
@@ -33,7 +38,7 @@ public class Assignment4Tester{
 	for(int i=0; i<numProcesses; i++){
 	    processSizeIndex = rGenerator.nextInt(4);
 	    processDurationIndex = rGenerator.nextInt(5);
-	    Process process = new Process(processSizes[processSizeIndex], processDurations[processDurationIndex], i);
+	    Process process = new Process(processSizes[processSizeIndex], processDurations[processDurationIndex], processNames.substring(i,i+1));
 	    processes.add(process);
 	}
 	printProcesses();

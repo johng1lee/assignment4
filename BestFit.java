@@ -40,7 +40,7 @@ public class BestFit
     		p.setMemoryEndIndex(besthole.getStartIndex()+p.getSize()-1);
     		for(;i<=j;i++)
     		{
-    			memory.set(i, Integer.toString(p.getID()));
+    			memory.set(i, p.getID());
     		}
     		
     		runningProcesses.add(p);

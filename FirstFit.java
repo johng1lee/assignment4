@@ -45,7 +45,7 @@ public class FirstFit{
     			readyProcess.setMemoryStartIndex(hole.getStartIndex());
     			readyProcess.setMemoryEndIndex(hole.getStartIndex() + readyProcess.getSize() - 1);
     			for(int i=readyProcess.getMemoryStartIndex();i<=readyProcess.getMemoryEndIndex();i++){
-    				memory.set(i,Integer.toString(readyProcess.getID()));
+    				memory.set(i,readyProcess.getID());
     			}
     			hole.setStartIndex(hole.getStartIndex() + readyProcess.getSize());
     			if (hole.getSize() <= 0) // testing to see if fixes error *it does fix the error with a hole of size 0 I was getting
