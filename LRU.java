@@ -29,21 +29,78 @@ public class LRU
 	 
 	 public void beginPaging()
 	 {
-		 int counter0 = 0;
-		 int counter1 = 0;
-		 int counter2 = 0;
-		 int counter3 = 0;
-		 
+		
+		 ArrayList<Page> pages = new ArrayList<Page>();
+		 pages.add(new Page(0));
+		 pages.add(new Page(1));
+		 pages.add(new Page(2));
+		 pages.add(new Page(3));
+		 int index = 0;
 		 for(Integer i: pageList)
 		 {
+			 
+			 
+			 System.out.println(i);
+			 pages.get(0).incrementCount();
+			 pages.get(1).incrementCount();
+			 pages.get(2).incrementCount();
+			 pages.get(3).incrementCount();
 			 if(!physicalMemory.contains(i))
 			 {
-				 physicalMemory.add(index, element);
+				
+			
+				 ArrayList<Page> sorted = new ArrayList<Page>(pages);
+
+				 Comparator<Page> comp1 = new
+						 Comparator<Page>()
+						 {
+					 		public int compare(Page p1,Page p2)
+					 		{
+					 			return p2.getcount()-p1.getcount();
+					 		}
+						 };
+				 Collections.sort(sorted,comp1);
+				 index = sorted.get(0).getid();
+				 physicalMemory.set(index, i);
+				 if(index == 0) 
+				 { 
+					 pages.get(0).setCount(0);
+				 }
+				 if(index == 1) 
+				 { 
+					 pages.get(1).setCount(0);
+				 }
+				 if(index == 2)
+				 { 
+					 pages.get(2).setCount(0);
+				 }
+				 if(index == 3)
+				 { 
+					 pages.get(3).setCount(0);
+				 }
 			 }
+			 else{
+			 if(i == physicalMemory.get(0)) pages.get(0).setCount(0);
+			 if(i == physicalMemory.get(1)) pages.get(1).setCount(0);
+			 if(i == physicalMemory.get(2)) pages.get(2).setCount(0);
+			 if(i == physicalMemory.get(3)) pages.get(3).setCount(0);
+			 }
+			
+			 
+			 printMemory();
+			 
 		 }
 	 }
-	 
-	 
+
+	 public void printMemory()
+	 {
+		System.out.printf("Memory: ");
+		for(int i=0;i<MEMORY_SIZE;i++)
+		{
+			System.out.print(physicalMemory.get(i));
+		}
+		System.out.println();
+	 }
 	 
 	 
 }

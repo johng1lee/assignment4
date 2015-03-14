@@ -30,15 +30,16 @@ public class FIFO
 	 {
 		 for(Integer i: pageList)
 		 {
-			 //System.out.print(i);
+			 System.out.print(i);
 			 if(!physicalMemory.contains(i))
 			 {
-				 physicalMemory.add(index,i); 
+				 physicalMemory.set(index,i); 
 				 index++;
 				 if(index >3) index = 0;
-				 printMemory();
+				 //printMemory();
 			 }
 			 System.out.print("    ");
+			 printMemory();
 		 }
 	 }
 	 
