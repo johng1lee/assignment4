@@ -63,7 +63,6 @@ public class WorstFit{
 	    iterRunningProcesses = runningProcesses.iterator();
 	    while(iterRunningProcesses.hasNext()){
 		evaluateProcess = iterRunningProcesses.next();
-		evaluateProcess.decrementTime();//decrement time
 		if(evaluateProcess.isDone()){
 		    for(int i=evaluateProcess.getMemoryStartIndex();i<=evaluateProcess.getMemoryEndIndex();i++){
 			memory.set(i,".");
@@ -72,6 +71,7 @@ public class WorstFit{
 		    holes.add(new Hole(evaluateProcess.getMemoryStartIndex(),evaluateProcess.getMemoryEndIndex()));
 		    printMemory();
 		}
+		evaluateProcess.decrementTime();//decrement time
 	    }
 	    Collections.sort(holes,new Comparator<Hole>(){
 		    public int compare(Hole h1, Hole h2){

@@ -163,7 +163,6 @@ public class NextFit{
 	    // After sorting, we have the new starting index.
 	    lastAccessedHoleIndex = holes.indexOf(currentStartingHole);
 	    mergeHoles();
-	    //Collections.sort(holes);
 	    time++;
     	}
     }
@@ -185,6 +184,15 @@ public class NextFit{
 		current = iterHoles.next();
 		if(previous == null || current == null){return;}
 		if(previous.getEndIndex()+1 == current.getStartIndex()){
+		    // - - - - - - -
+		    // Based on the professor's response, if the hole is merged to the one before, then we go to the next one.
+		    // If the hole is merged to ones after it, then its okay
+		    // If the hole is merged to both before and after, then we take the one following I guess.
+		    // Now if the hole that we merge together is at the end or goes all the way to the end, we then make the hole to start from the first hole in the list.
+		    //
+		    // I think if we set up conditions where we obtain the hole position by calling holes.indexOf(currentStartingHole) and see where its at in the list,
+		    // we can then figure out whether or not we set the currentStartingHole to be the first element in the list... simple solution?
+		    // - - - - - - -
 		    if(currentStartingHole.equals(current)){
 			currentStartingHole = previous;
 		    }
