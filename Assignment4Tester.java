@@ -90,46 +90,54 @@ public class Assignment4Tester{
     public List<Integer> getPages(){
 	return pages;
     }
+    
     public static void main(String[] args){
 
-	//Assignment4Tester generator = new Assignment4Tester(60);
-	//WorstFit wf = new WorstFit(generator.getProcesses());
-	//wf.beginSwapping();
-	//BestFit bf = new BestFit(generator.getProcesses());
-	//bf.beginSwapping();
-	//Assignment4Tester generator1 = new Assignment4Tester(0);
-	//RandomPaging rp = new RandomPaging(generator1.getPages());
-	//rp.beginPaging();
-	//FIFO fifo = new FIFO(generator1.getPages());
-	//fifo.beginPaging();
-	//LRU lru = new LRU(generator1.getPages());
-	//lru.beginPaging();
-
-	// for(int i = 0;i<5;i++){
-	//     Assignment4Tester generator = new Assignment4Tester(5);
-	//     WorstFit wf = new WorstFit(generator.getProcesses());
-	//     wf.beginSwapping();
-	// }
-
-	// Assignment4Tester generator1 = new Assignment4Tester(0);
-	// RandomPaging rp = new RandomPaging(generator1.getPages());
-	// rp.beginPaging();
-
-	// Assignment4Tester generator2 = new Assignment4Tester(53);
-	// FirstFit ff = new FirstFit(generator2.getProcesses());
-	// ff.beginSwapping();
-
-	Assignment4Tester generator3 = new Assignment4Tester(53);
-	NextFit nf = new NextFit(generator3.getProcesses());
-	nf.beginSwapping();
-
-	// Assignment4Tester generator4 = new Assignment4Tester(0);
-	// MFU mfu = new MFU(generator4.getPages());
-	// mfu.beginPaging();
-
-	// Assignment4Tester generator5 = new Assignment4Tester(0);
-	// LFU lfu = new LFU(generator5.getPages());
-	// lfu.beginPaging();
-
+    	float avgFFProcess = 0;
+    	for(int i = 0;i<5;i++){
+    		Assignment4Tester generator1 = new Assignment4Tester(62);
+    		FirstFit ff = new FirstFit(generator1.getProcesses());
+    		ff.beginSwapping();
+    		avgFFProcess += (float)ff.getProcessCompleted();
+    	}
+    	
+    	float avgNFProcess = 0;
+    	for(int i = 0;i<5;i++){
+    		Assignment4Tester generator2 = new Assignment4Tester(62);
+    		NextFit nf = new NextFit(generator2.getProcesses());
+    		nf.beginSwapping();
+    		avgNFProcess += (float)nf.getProcessCompleted();
+    	}
+    	
+    	float avgWFProcess = 0;
+    	for(int i = 0;i<5;i++){
+    		Assignment4Tester generator3 = new Assignment4Tester(62);
+    		WorstFit wf = new WorstFit(generator3.getProcesses());
+    		wf.beginSwapping();
+    		avgWFProcess += (float)wf.getProcessCompleted();
+    	}
+     
+    	float avgLFUHitRatio = 0;
+    	for (int i = 0;i<5;i++){
+    		Assignment4Tester generator4 = new Assignment4Tester(0);
+    		LFU lfu = new LFU(generator4.getPages());
+    		lfu.beginPaging();
+    		avgLFUHitRatio += lfu.getHitCount();
+    	}
+   
+    	float avgMFUHitRatio = 0;
+    	for (int i = 0;i<5;i++){
+    		Assignment4Tester generator5 = new Assignment4Tester(0);
+    		MFU mfu = new MFU(generator5.getPages());
+    		mfu.beginPaging();
+    		avgMFUHitRatio += mfu.getHitCount();
+    	}
+   
+    	System.out.println("\nProcesses:\nAverage First Fit: " + avgFFProcess/5);
+    	System.out.println("Average Next Fit: " + avgNFProcess/5);
+    	System.out.println("Average Worst Fit: " + avgWFProcess/5);
+   
+    	System.out.println("\nPages:\nAverage LFU hits: " + avgLFUHitRatio/5);
+    	System.out.println("Average MFU hits: " + avgMFUHitRatio/5);
     }
 }

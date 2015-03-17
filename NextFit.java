@@ -10,6 +10,7 @@ public class NextFit{
     ArrayList<Hole> holes;
     private int lastAccessedHoleIndex = 0;
     private Hole currentStartingHole = null;
+    private int processCompleted;
     
     public NextFit(List<Process> allProcesses){
     	this.allProcesses = allProcesses;
@@ -21,7 +22,8 @@ public class NextFit{
     	runningProcesses = new ArrayList<Process>();
     	holes = new ArrayList<Hole>();
     	holes.add(new Hole(0,MEMORY_SIZE-1));
-	currentStartingHole = holes.get(0);
+    	currentStartingHole = holes.get(0);
+    	processCompleted = 0;
 
     }
 
@@ -138,7 +140,7 @@ public class NextFit{
     		
 	    if (!isProcessServed)
 		System.out.println("Not enough memory for Process " + readyProcess.getID() + " to be placed---------------------");
-	    Process completedProcess = null;
+	    //Process completedProcess = null;
 	    Process evaluateProcess = null;
 	    iterRunningProcesses = runningProcesses.iterator();
 	    while(iterRunningProcesses.hasNext()){
@@ -152,6 +154,7 @@ public class NextFit{
 		    iterRunningProcesses.remove();//remove completed processes from running process list
 		    holes.add(new Hole(evaluateProcess.getMemoryStartIndex(),evaluateProcess.getMemoryEndIndex()));
 		    printMemory();
+		    processCompleted++;
 		}
 		evaluateProcess.decrementTime();//decrement time
 	    }
@@ -163,6 +166,7 @@ public class NextFit{
 	    // After sorting, we have the new starting index.
 	    lastAccessedHoleIndex = holes.indexOf(currentStartingHole);
 	    mergeHoles();
+	    System.out.println("Time Elasped: " + time);
 	    time++;
     	}
     }
@@ -212,5 +216,9 @@ public class NextFit{
 	    System.out.print(s);
     	}
     	System.out.println();
+    }
+    
+    public int getProcessCompleted(){
+    	return processCompleted;
     }
 }

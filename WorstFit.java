@@ -1,18 +1,15 @@
 import java.util.*;
 
 public class WorstFit{
-    /*
-      Worst Fit: Finds the largest segment of memory for swapping a process in.
-      Start with 100 chunk of memory.
-      First time around, swap one in. Update largest Hole Size and Hole Locations.
-      
-     */
+   
     ArrayList<String> memory;
     final int RUN_TIME = 60;
     final int MEMORY_SIZE = 100;
     List<Process> allProcesses;
     ArrayList<Process> runningProcesses;
     ArrayList<Hole> holes;
+    private int processCompleted;
+    
     public WorstFit(List<Process> allProcesses){
 	this.allProcesses = allProcesses;
 	memory = new ArrayList<String>();
@@ -23,7 +20,7 @@ public class WorstFit{
 	runningProcesses = new ArrayList<Process>();
 	holes = new ArrayList<Hole>();
 	holes.add(new Hole(0,MEMORY_SIZE-1));
-
+	processCompleted = 0;
     }
 
     public void beginSwapping(){
@@ -58,7 +55,6 @@ public class WorstFit{
 	    else{
 		isProcessServed = false;
 	    }
-	    Process completedProcess = null;
 	    Process evaluateProcess = null;
 	    iterRunningProcesses = runningProcesses.iterator();
 	    while(iterRunningProcesses.hasNext()){
@@ -70,6 +66,7 @@ public class WorstFit{
 		    iterRunningProcesses.remove();//remove completed processes from running process list
 		    holes.add(new Hole(evaluateProcess.getMemoryStartIndex(),evaluateProcess.getMemoryEndIndex()));
 		    printMemory();
+		    processCompleted++;
 		}
 		evaluateProcess.decrementTime();//decrement time
 	    }
@@ -106,16 +103,14 @@ public class WorstFit{
 	    }
 	}
     }
-    private void printHoles(){
-	System.out.println("------------HOLES----------");
-	for(Hole h: holes){
-	    System.out.println(h);
-	}
-    }
     private void printMemory(){
 	for(String s:memory){
 	    System.out.print(s);
 	}
 	System.out.println();
+    }
+    
+    public int getProcessCompleted(){
+    	return processCompleted;
     }
 }

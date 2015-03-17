@@ -7,6 +7,7 @@ public class MFU{
     private final int MEMORY_SIZE = 4;
     private List<Integer> pageList;
     private HashMap<Integer, Integer> processToCount = new HashMap<Integer,Integer>();
+    private int numberHits;
 
     
     public MFU(List<Integer> pageList){
@@ -19,6 +20,7 @@ public class MFU{
 	for(int i=0;i<DISK_SIZE;i++){
 	    disk.add(i);
 	}
+	numberHits = 0;
     }
 
     private int mostFrequentlyUsed(){
@@ -76,6 +78,7 @@ public class MFU{
 	    else{
 		Integer counter = processToCount.get(nextPage);
 		processToCount.put(nextPage,counter + 1);
+		numberHits++;
 		printMemory();
 	    }
 	}
@@ -91,5 +94,8 @@ public class MFU{
 	    }
 	}
 	System.out.println();
+    }
+    public float getHitCount(){
+    	return (float)numberHits;
     }
 }

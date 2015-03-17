@@ -8,6 +8,7 @@ public class FirstFit{
     List<Process> allProcesses;
     ArrayList<Process> runningProcesses;
     ArrayList<Hole> holes;
+    private int processCompleted;
     
     public FirstFit(List<Process> allProcesses){
     	this.allProcesses = allProcesses;
@@ -19,6 +20,7 @@ public class FirstFit{
     	runningProcesses = new ArrayList<Process>();
     	holes = new ArrayList<Hole>();
     	holes.add(new Hole(0,MEMORY_SIZE-1));
+    	processCompleted = 0;
     }
 
     public void beginSwapping(){
@@ -61,7 +63,6 @@ public class FirstFit{
     		
     		if (!isProcessServed)
     			System.out.println("Not enough memory for Process " + readyProcess.getID() + " to be placed---------------------");
-    		Process completedProcess = null;
     		Process evaluateProcess = null;
     		iterRunningProcesses = runningProcesses.iterator();
     		while(iterRunningProcesses.hasNext()){
@@ -74,6 +75,7 @@ public class FirstFit{
     				iterRunningProcesses.remove();//remove completed processes from running process list
     				holes.add(new Hole(evaluateProcess.getMemoryStartIndex(),evaluateProcess.getMemoryEndIndex()));
     				printMemory();
+    				processCompleted++;
     			}
     			evaluateProcess.decrementTime();//decrement time
     		}
@@ -83,7 +85,6 @@ public class FirstFit{
     		}
     		});
     		mergeHoles();
-    		//Collections.sort(holes);
     		time++;
     	}
     }
@@ -121,5 +122,9 @@ public class FirstFit{
     		System.out.print(s);
     	}
     	System.out.println();
+    }
+    
+    public int getProcessCompleted(){
+    	return processCompleted;
     }
 }
