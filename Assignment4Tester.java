@@ -132,6 +132,14 @@ public class Assignment4Tester{
     		mfu.beginPaging();
     		avgMFUHitRatio += mfu.getHitCount();
     	}
+    	
+    	float avgRPHitRatio = 0;
+    	for (int i = 0;i<5;i++){
+    		Assignment4Tester generator6 = new Assignment4Tester(0);
+    		RandomPaging rp = new RandomPaging(generator6.getPages());
+    		rp.beginPaging();
+    		avgRPHitRatio += rp.getHitCount();
+    	}
    
     	System.out.println("\nProcesses:\nAverage First Fit: " + avgFFProcess/5);
     	System.out.println("Average Next Fit: " + avgNFProcess/5);
@@ -139,5 +147,6 @@ public class Assignment4Tester{
    
     	System.out.println("\nPages:\nAverage LFU hits: " + avgLFUHitRatio/5);
     	System.out.println("Average MFU hits: " + avgMFUHitRatio/5);
+    	System.out.println("Average RandomPick hits: " + avgRPHitRatio/5);
     }
 }

@@ -7,6 +7,7 @@ public class RandomPaging{
     private final int MEMORY_SIZE = 4;
     private List<Integer> pageList;
     private final int[] randomIndex = new int[MEMORY_SIZE];
+    private int numberHits;
     
     public RandomPaging(List<Integer> pageList){
 	this.pageList = pageList;
@@ -19,6 +20,7 @@ public class RandomPaging{
 	for(int i=0;i<DISK_SIZE;i++){
 	    disk.add(i);
 	}
+	numberHits = 0;
     }
 
     public void beginPaging(){
@@ -44,17 +46,24 @@ public class RandomPaging{
 		printMemory();
 	    }
 	    else{
-		System.out.printf("Found it! | ");
+		numberHits++;
 		printMemory();
-		
 	    }
 	}
     }
     public void printMemory(){
 	System.out.printf("Memory: ");
 	for(int i=0;i<MEMORY_SIZE;i++){
-	    System.out.print(physicalMemory.get(i));
+		if(physicalMemory.get(i)==null){
+		System.out.print("-");
+		}
+		else{
+		System.out.print(physicalMemory.get(i));
+		}
 	}
 	System.out.println();
+    }
+    public float getHitCount(){
+    	return (float)numberHits;
     }
 }
