@@ -45,10 +45,12 @@ public class BestFit
         			{
         				memory.set(start, ".");
         			}
+        			System.out.println(runningProcesses.get(k)+"| Exit ");
         			runningProcesses.remove(runningProcesses.get(k));
+                    
         		}
     		}
-    		System.out.println(counter);
+    		//System.out.println(counter);
     		Process p = allProcesses.get(counter);
     		Hole besthole = findBestHole(p,memory);
     		if(besthole == null)
@@ -58,6 +60,7 @@ public class BestFit
     		}
     		else{
     		//System.out.println(besthole);
+    		System.out.println(p+"| Enter ");
     		p.setMemoryStartIndex(besthole.getStartIndex());
     		p.setMemoryEndIndex(besthole.getStartIndex()+p.getSize()-1);
     		int i = p.getMemoryStartIndex();
@@ -85,7 +88,7 @@ public class BestFit
     	ArrayList <Hole> holes = new ArrayList<Hole>();
     	int i = 0;
     	start = i;
-    	System.out.println(currentProcess);
+    	//System.out.println(currentProcess);
     	//System.out.println(list);
     	for( ;i<list.size()-1;i++)
     	{
