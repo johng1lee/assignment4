@@ -39,7 +39,7 @@ public class FirstFit{
     		if(readyProcess == null){
     			return;
     		}
-    		System.out.println(readyProcess);
+    		System.out.println(readyProcess + "| Entered");
     		for (int j = 0; j < holes.size(); j++){ // added for loop to check if there are multiples holes, and traverse them and find correct sized hole 
     		Hole hole = holes.get(j);
     		if(readyProcess.getSize()<=hole.getSize()){
@@ -71,7 +71,8 @@ public class FirstFit{
     				for(int i=evaluateProcess.getMemoryStartIndex();i<=evaluateProcess.getMemoryEndIndex();i++){
     					memory.set(i,".");
     				}
-    				System.out.println("Process Removed---------------------");
+				System.out.println(evaluateProcess + "| Exited");
+
     				iterRunningProcesses.remove();//remove completed processes from running process list
     				holes.add(new Hole(evaluateProcess.getMemoryStartIndex(),evaluateProcess.getMemoryEndIndex()));
     				printMemory();
