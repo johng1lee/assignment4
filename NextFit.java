@@ -50,9 +50,12 @@ public class NextFit{
 	    }
 	    // - - - - - - -
 	    //System.out.printf("\nPrior to loop, currentStartingHole: %s | lastAccessedHoleIndex: %d | number of holes: %d\n",currentStartingHole.toString(),lastAccessedHoleIndex,holes.size());
+	    // - - - - - - -
 	    for (int j = lastAccessedHoleIndex; j < holes.size(); j++){ 
+		// - - - - - - -
 		// added for loop to check if there are multiples holes,
 		// and traverse them and find correct sized hole 
+		// - - - - - - -
 		Hole hole = holes.get(j);
 		//System.out.printf("First loop: Index %d | Hole info: %s\n",j,hole.toString());
 		if(readyProcess.getSize()<=hole.getSize()){
@@ -75,13 +78,17 @@ public class NextFit{
 		    currentStartingHole = hole;
 		    if (hole.getSize() <= 0){ // testing to see if fixes error *it does fix the error with a hole of size 0 I was getting
 			holes.remove(j);
-			    if(holes.size()<= j){
+			if(holes.size() <= j && holes.size() > 0){
 				currentStartingHole = holes.get(0);
-			    }
-			    else{
+			}
+			else if(holes.size() > 0){
 
-				currentStartingHole = holes.get(j); // gets the next hole that has shifted over
-			    }
+			    currentStartingHole = holes.get(j); // gets the next hole that has shifted over
+			}
+			else{
+			    holes.add(new Hole(0,0));
+			    currentStartingHole = holes.get(0);
+			}
 		    }
 		    // - - - - - - -
 		    // print memory and exit loop
@@ -116,14 +123,16 @@ public class NextFit{
 			// - - - - - - -
 			hole.setStartIndex(hole.getStartIndex() + readyProcess.getSize());
 			currentStartingHole = hole;
-			if (hole.getSize() <= 0){ // testing to see if fixes error *it does fix the error with a hole of size 0 I was getting
-			    holes.remove(j);
-			    if(holes.size()<= j){
-				currentStartingHole = holes.get(0);
-			    }
-			    else{
-				currentStartingHole = holes.get(j); // gets the next hole that has shifted over
-			    }
+			if(holes.size() <= j && holes.size() > 0){
+			    currentStartingHole = holes.get(0);
+			}
+			else if(holes.size() > 0){
+			    
+			    currentStartingHole = holes.get(j); // gets the next hole that has shifted over
+			}
+			else{
+			    holes.add(new Hole(0,0));
+			    currentStartingHole = holes.get(0);
 			}
 			// - - - - - - -
 			// print memory and exit loop
