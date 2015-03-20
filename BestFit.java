@@ -9,6 +9,7 @@ public class BestFit
     List<Process> allProcesses;
     ArrayList<Process> runningProcesses;
     ArrayList<Hole> holes;
+    private int processCompleted;
     
     
     public BestFit(List<Process> allProcesses)
@@ -22,8 +23,7 @@ public class BestFit
     	}
 
     	runningProcesses = new ArrayList<Process>();
-    	//holes = new ArrayList<Hole>();
-    	//holes.add(new Hole(0,MEMORY_SIZE-1));
+    	//processCompleted = 0;
 
     }
 
@@ -69,6 +69,7 @@ public class BestFit
     		}
     		//System.out.println(p);
     		runningProcesses.add(p);
+    		processCompleted++;
     		time++;
     		counter++;
     		printMemory();
@@ -146,6 +147,10 @@ public class BestFit
 	    System.out.print(s);
 	}
 	System.out.println();
+    }
+    
+    public int getProcessCompleted(){
+    	return processCompleted;
     }
 }
 	

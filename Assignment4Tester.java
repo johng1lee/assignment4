@@ -100,6 +100,13 @@ public class Assignment4Tester{
     		ff.beginSwapping();
     		avgFFProcess += (float)ff.getProcessCompleted();
     	}
+    	float avgBFProcess = 0;
+    	for(int i = 0;i<5;i++){
+    		Assignment4Tester generator1 = new Assignment4Tester(62);
+    		BestFit bf = new BestFit(generator1.getProcesses());
+    		bf.beginSwapping();
+    		avgBFProcess += (float)bf.getProcessCompleted();
+    	}
     	
     	float avgNFProcess = 0;
     	for(int i = 0;i<5;i++){
@@ -116,6 +123,14 @@ public class Assignment4Tester{
     		wf.beginSwapping();
     		avgWFProcess += (float)wf.getProcessCompleted();
     	}
+    	
+    	float avgFIFOHitRatio = 0;
+    	for (int i = 0;i<5;i++){
+    		Assignment4Tester generator4 = new Assignment4Tester(0);
+    		FIFO fifo = new FIFO(generator4.getPages());
+    		fifo.beginPaging();
+    		avgFIFOHitRatio += fifo.getHitCount();
+    	}
      
     	float avgLFUHitRatio = 0;
     	for (int i = 0;i<5;i++){
@@ -123,6 +138,13 @@ public class Assignment4Tester{
     		LFU lfu = new LFU(generator4.getPages());
     		lfu.beginPaging();
     		avgLFUHitRatio += lfu.getHitCount();
+    	}
+    	float avgLRUHitRatio = 0;
+    	for (int i = 0;i<5;i++){
+    		Assignment4Tester generator4 = new Assignment4Tester(0);
+    		LRU lru = new LRU(generator4.getPages());
+    		lru.beginPaging();
+    		avgLRUHitRatio += lru.getHitCount();
     	}
    
     	float avgMFUHitRatio = 0;
@@ -141,11 +163,15 @@ public class Assignment4Tester{
     		avgRPHitRatio += rp.getHitCount();
     	}
    
+    	
     	System.out.println("\nProcesses:\nAverage First Fit: " + avgFFProcess/5);
     	System.out.println("Average Next Fit: " + avgNFProcess/5);
+    	System.out.println("Average Best Fit: " + avgBFProcess/5);
     	System.out.println("Average Worst Fit: " + avgWFProcess/5);
    
     	System.out.println("\nPages:\nAverage LFU hits: " + avgLFUHitRatio/5);
+    	System.out.println("Average FIFO hits: " + avgFIFOHitRatio/5);
+    	System.out.println("Average LRU hits: " + avgLRUHitRatio/5);
     	System.out.println("Average MFU hits: " + avgMFUHitRatio/5);
     	System.out.println("Average RandomPick hits: " + avgRPHitRatio/5);
     }
