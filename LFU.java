@@ -96,6 +96,6 @@ public class LFU{
 	System.out.println();
     }
     public float getHitCount(){
-    	return (float)numberHits;
+    	return (float)numberHits/100.0;
     }
 }
