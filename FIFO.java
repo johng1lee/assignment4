@@ -9,6 +9,7 @@ public class FIFO
 	 private final int MEMORY_SIZE = 4;
 	 private List<Integer> pageList;
 	 private final int[] randomIndex = new int[MEMORY_SIZE];
+	 private int numberHits;
 	    
 	 public FIFO(List<Integer> pageList)
 	 {
@@ -24,6 +25,7 @@ public class FIFO
 		{
 		    disk.add(i);
 		}
+		numberHits = 0;
      }
 	 int index = 0;
 	 public void beginPaging()
@@ -35,6 +37,7 @@ public class FIFO
 			 {
 				 physicalMemory.set(index,i); 
 				 index++;
+				 numberHits++;
 				 if(index >3) index = 0;
 				 //printMemory();
 			 }
@@ -51,5 +54,8 @@ public class FIFO
 			System.out.print(physicalMemory.get(i));
 		}
 			System.out.println();
+	 }
+	 public float getHitCount(){
+	    return (float)numberHits;
 	 }
 }

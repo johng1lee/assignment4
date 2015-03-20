@@ -10,6 +10,7 @@ public class LRU
 	 private final int MEMORY_SIZE = 4;
 	 private List<Integer> pageList;
 	 private final int[] randomIndex = new int[MEMORY_SIZE];
+	 private int numberHits;
 	 
 	 public LRU(List<Integer> pageList)
 	 {
@@ -25,6 +26,7 @@ public class LRU
 			{
 			    disk.add(i);
 			}
+			numberHits = 0;
 	 }
 	 
 	 public void beginPaging()
@@ -48,7 +50,7 @@ public class LRU
 			 if(!physicalMemory.contains(i))
 			 {
 				
-			
+				 numberHits++;
 				 ArrayList<Page> sorted = new ArrayList<Page>(pages);
 
 				 Comparator<Page> comp1 = new
@@ -101,6 +103,8 @@ public class LRU
 		}
 		System.out.println();
 	 }
-	 
+	 public float getHitCount(){
+		    return (float)numberHits;
+		 }
 	 
 }
