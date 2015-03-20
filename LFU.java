@@ -45,9 +45,11 @@ public class LFU{
 	int countUntilFull = 0;
 	while(iterList.hasNext()){
 	    nextPage = iterList.next();
-	    System.out.printf("Page needed: %d | ",nextPage);
+	    printMemory();
+	    System.out.printf(" | Page needed: %d | ",nextPage);
 	    if(!physicalMemory.contains(nextPage)){
 		if(countUntilFull < MEMORY_SIZE){
+		    System.out.printf("Page evicted: None\n");
 		    physicalMemory.set(countUntilFull,nextPage);
 		    if(processToCount.get(nextPage) == null){
 			processToCount.put(nextPage,1);
@@ -62,6 +64,7 @@ public class LFU{
 			System.out.println("Should not happen");
 		    }
 		    else{
+			System.out.printf("Page evicted: %d\n",physicalMemory.get(evictIndex));
 			processToCount.put(physicalMemory.get(evictIndex.intValue()),0);
 			physicalMemory.set(evictIndex.intValue(),nextPage);
 			if(processToCount.get(nextPage) == null){
@@ -73,13 +76,14 @@ public class LFU{
 		    }
 		}
 		countUntilFull++;
-		printMemory();
+
 	    }
 	    else{
+		System.out.printf("Page evicted: None\n");
 		Integer counter = processToCount.get(nextPage);
 		processToCount.put(nextPage,counter + 1);
 		numberHits++;
-		printMemory();
+
 	    }
 	}
     }
@@ -93,7 +97,7 @@ public class LFU{
 		System.out.print(physicalMemory.get(i));
 	    }
 	}
-	System.out.println();
+
     }
     public float getHitCount(){
     	return (float)numberHits/(float)100.0;

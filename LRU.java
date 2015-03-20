@@ -41,8 +41,8 @@ public class LRU
 		 for(Integer i: pageList)
 		 {
 			 
-			 
-			 System.out.println(i);
+		     printMemory();			 
+		     System.out.printf(" | Page needed: %d |",i);
 			 pages.get(0).incrementCount();
 			 pages.get(1).incrementCount();
 			 pages.get(2).incrementCount();
@@ -50,7 +50,7 @@ public class LRU
 			 if(!physicalMemory.contains(i))
 			 {
 				
-				 numberHits++;
+
 				 ArrayList<Page> sorted = new ArrayList<Page>(pages);
 
 				 Comparator<Page> comp1 = new
@@ -64,24 +64,52 @@ public class LRU
 				 Collections.sort(sorted,comp1);
 				 index = sorted.get(0).getid();
 				 physicalMemory.set(index, i);
+				 
 				 if(index == 0) 
 				 { 
+				     if(physicalMemory.get(index) == null){
+					 System.out.printf("Page evicted: None\n");					 
+				     }
+				     else{
+					 System.out.printf("Page evicted: %d\n",physicalMemory.get(index));
+				     }
 					 pages.get(0).setCount(0);
 				 }
 				 if(index == 1) 
-				 { 
+				     { 	
+					 if(physicalMemory.get(index) == null){
+					     System.out.printf("Page evicted: None\n");					 
+					 }
+					 else{
+					     System.out.printf("Page evicted: %d\n",physicalMemory.get(index));
+					 }
 					 pages.get(1).setCount(0);
 				 }
 				 if(index == 2)
 				 { 
+					 if(physicalMemory.get(index) == null){
+					     System.out.printf("Page evicted: None\n");					 
+					 }
+					 else{
+					     System.out.printf("Page evicted: %d\n",physicalMemory.get(index));
+					 }
+
 					 pages.get(2).setCount(0);
 				 }
 				 if(index == 3)
 				 { 
+					 if(physicalMemory.get(index) == null){
+					     System.out.printf("Page evicted: None\n");					 
+					 }
+					 else{
+					     System.out.printf("Page evicted: %d\n",physicalMemory.get(index));
+					 }
 					 pages.get(3).setCount(0);
 				 }
 			 }
 			 else{
+			     System.out.printf("Page evicted: None\n");
+				 numberHits++;
 			 if(i == physicalMemory.get(0)) pages.get(0).setCount(0);
 			 if(i == physicalMemory.get(1)) pages.get(1).setCount(0);
 			 if(i == physicalMemory.get(2)) pages.get(2).setCount(0);
@@ -89,22 +117,25 @@ public class LRU
 			 }
 			
 			 
-			 printMemory();
+
 			 
 		 }
 	 }
 
-	 public void printMemory()
-	 {
-		System.out.printf("Memory: ");
-		for(int i=0;i<MEMORY_SIZE;i++)
-		{
-			System.out.print(physicalMemory.get(i));
+    public void printMemory(){
+	System.out.printf("Memory: ");
+	for(int i=0;i<MEMORY_SIZE;i++){
+		if(physicalMemory.get(i)==null){
+		System.out.print("-");
 		}
-		System.out.println();
-	 }
+		else{
+		System.out.print(physicalMemory.get(i));
+		}
+	}
+
+    }
 	 public float getHitCount(){
-		    return (float)numberHits;
+	     return (float)numberHits/(float)100;
 		 }
 	 
 }

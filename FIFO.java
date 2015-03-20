@@ -32,17 +32,27 @@ public class FIFO
 	 {
 		 for(Integer i: pageList)
 		 {
-			 System.out.print(i);
+		     printMemory();
+		     System.out.printf(" | Page needed: %d |",i);
 			 if(!physicalMemory.contains(i))
 			 {
+			     if(physicalMemory.get(index) == null){
+				 System.out.printf("Page evicted: None\n");					 
+			     }
+			     else{
+				 System.out.printf("Page evicted: %d\n",physicalMemory.get(index));
+			     }
 				 physicalMemory.set(index,i); 
 				 index++;
-				 numberHits++;
+
 				 if(index >3) index = 0;
 				 //printMemory();
 			 }
-			 System.out.print("    ");
-			 printMemory();
+			 else{
+			     System.out.printf("Page evicted: None\n");
+			     numberHits++;
+			 }
+
 		 }
 	 }
 	 
@@ -51,11 +61,15 @@ public class FIFO
 		System.out.printf("Memory: ");
 		for(int i=0;i<MEMORY_SIZE;i++)
 		{
+		    if(physicalMemory.get(i) == null){
+			System.out.print("-");
+		    }
+		    else{
 			System.out.print(physicalMemory.get(i));
+		    }
 		}
-			System.out.println();
 	 }
 	 public float getHitCount(){
-	    return (float)numberHits;
+	     return (float)numberHits/(float)100;
 	 }
 }

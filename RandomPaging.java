@@ -31,23 +31,26 @@ public class RandomPaging{
 	int countUntilFull = 0;
 	while(iterList.hasNext()){
 	    nextPage = iterList.next();
-	    System.out.printf("Page needed: %d |",nextPage);
+	    printMemory();
+	    System.out.printf(" | Page needed: %d |",nextPage);
 	    if(!physicalMemory.contains(nextPage)){
 
 		if(countUntilFull < MEMORY_SIZE){
 		    physicalMemory.set(countUntilFull,nextPage);
+		    System.out.printf("Page evicted: None\n");
 		}
 		else{
 		    evictIndex = randomPagePicker.nextInt(MEMORY_SIZE);
+		    System.out.printf("Page evicted: %d\n",physicalMemory.get(evictIndex));		    
 		    physicalMemory.set(evictIndex,nextPage);
 		    
 		}
 		countUntilFull++;
-		printMemory();
+
 	    }
 	    else{
 		numberHits++;
-		printMemory();
+		System.out.printf("Page evicted: None\n");
 	    }
 	}
     }
@@ -61,7 +64,6 @@ public class RandomPaging{
 		System.out.print(physicalMemory.get(i));
 		}
 	}
-	System.out.println();
     }
     public float getHitCount(){
     	return (float)numberHits/(float)100.0;
