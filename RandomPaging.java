@@ -64,6 +64,6 @@ public class RandomPaging{
 	System.out.println();
     }
     public float getHitCount(){
-    	return (float)numberHits/100.0;
+    	return (float)numberHits/(float)100.0;
     }
 }
