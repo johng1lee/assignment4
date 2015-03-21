@@ -43,7 +43,7 @@ public class NextFit{
 	    if(readyProcess == null){
 		return;
 	    }
-	    System.out.println(readyProcess);
+	    System.out.println(readyProcess + "| Entered");
 	    lastAccessedHoleIndex = holes.indexOf(currentStartingHole);
 	    if( lastAccessedHoleIndex == -1){
 		lastAccessedHoleIndex = 0;//check later
@@ -102,6 +102,7 @@ public class NextFit{
 		}
 	    }
 	    if(!isProcessServed){
+
 		for (int j = 0; j < lastAccessedHoleIndex; j++){ // added for loop to check if there are multiples holes, and traverse them and find correct sized hole 
 		    Hole hole = holes.get(j);
 		    //System.out.printf("Second loop: Index %d | Hole info: %s\n",j,hole.toString());
@@ -159,7 +160,7 @@ public class NextFit{
 		    for(int i=evaluateProcess.getMemoryStartIndex();i<=evaluateProcess.getMemoryEndIndex();i++){
 			memory.set(i,".");
 		    }
-		    System.out.println("Process Removed---------------------");
+		    System.out.println(evaluateProcess + "| Exited");
 		    iterRunningProcesses.remove();//remove completed processes from running process list
 		    holes.add(new Hole(evaluateProcess.getMemoryStartIndex(),evaluateProcess.getMemoryEndIndex()));
 		    printMemory();
