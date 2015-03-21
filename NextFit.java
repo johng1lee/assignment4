@@ -124,6 +124,9 @@ public class NextFit{
 			// - - - - - - -
 			hole.setStartIndex(hole.getStartIndex() + readyProcess.getSize());
 			currentStartingHole = hole;
+		    if (hole.getSize() <= 0){ // testing to see if fixes error *it does fix the error with a hole of size 0 I was getting
+			holes.remove(j);
+
 			if(holes.size() <= j && holes.size() > 0){
 			    currentStartingHole = holes.get(0);
 			}
@@ -135,6 +138,7 @@ public class NextFit{
 			    holes.add(new Hole(0,0));
 			    currentStartingHole = holes.get(0);
 			}
+		    }
 			// - - - - - - -
 			// print memory and exit loop
 			// - - - - - - -
@@ -176,7 +180,7 @@ public class NextFit{
 	    // After sorting, we have the new starting index.
 	    lastAccessedHoleIndex = holes.indexOf(currentStartingHole);
 	    mergeHoles();
-	    System.out.println("Time Elasped: " + time);
+
 	    time++;
     	}
     }

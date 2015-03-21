@@ -42,7 +42,7 @@ public class WorstFit{
 	    System.out.println(readyProcess + "| Entered");
 	    Hole largestHole = holes.get(0);
 	    if(readyProcess.getSize()<=largestHole.getSize()){
-		System.out.println("Not enough memory for Process " + readyProcess.getID() + " to be placed---------------------");
+
 		runningProcesses.add(readyProcess);
 		readyProcess.setMemoryStartIndex(largestHole.getStartIndex());
 		readyProcess.setMemoryEndIndex(largestHole.getStartIndex() + readyProcess.getSize() - 1);
@@ -50,10 +50,17 @@ public class WorstFit{
 		    memory.set(i,readyProcess.getID());
 		}
 		largestHole.setStartIndex(largestHole.getStartIndex() + readyProcess.getSize());
+		if(largestHole.getSize()<=0){
+		    holes.remove(largestHole);
+		    if(holes.size()<=0){
+			holes.add(new Hole(0,0));
+		    }
+		}
 		printMemory();
 		isProcessServed = true;
 	    }
 	    else{
+		System.out.println("Not enough memory for Process " + readyProcess.getID() + " to be placed---------------------");
 		isProcessServed = false;
 	    }
 	    Process evaluateProcess = null;
@@ -101,6 +108,9 @@ public class WorstFit{
 		if(previous.getEndIndex()+1 == current.getStartIndex()){
 		    previous.mergeHole(current);
 		    iterHoles.remove();
+		}
+		else{
+		    previous = current;
 		}
 	    }
 	}
