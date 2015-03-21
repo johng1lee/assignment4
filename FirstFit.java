@@ -51,7 +51,7 @@ public class FirstFit{
     			}
     			hole.setStartIndex(hole.getStartIndex() + readyProcess.getSize());
     			if (hole.getSize() <= 0) // testing to see if fixes error *it does fix the error with a hole of size 0 I was getting
-    				holes.remove(0);
+    				holes.remove(j);
     			printMemory();
     			isProcessServed = true;
     			break;
