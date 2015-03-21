@@ -95,6 +95,7 @@ public class Assignment4Tester{
 
     	float avgFFProcess = 0;
     	for(int i = 0;i<5;i++){
+	    System.out.println("FIRSTFIT");
     		Assignment4Tester generator1 = new Assignment4Tester(62);
     		FirstFit ff = new FirstFit(generator1.getProcesses());
     		ff.beginSwapping();
@@ -102,22 +103,27 @@ public class Assignment4Tester{
     	}
     	float avgBFProcess = 0;
     	for(int i = 0;i<5;i++){
+	    System.out.println("BESTFIT");
     		Assignment4Tester generator1 = new Assignment4Tester(62);
     		BestFit bf = new BestFit(generator1.getProcesses());
     		bf.beginSwapping();
     		avgBFProcess += (float)bf.getProcessCompleted();
     	}
-    	
+
+	//NEXT FIT HAS AN ISSUE
     	float avgNFProcess = 0;
     	for(int i = 0;i<5;i++){
+	    System.out.println("NEXTFIT");
     		Assignment4Tester generator2 = new Assignment4Tester(62);
     		NextFit nf = new NextFit(generator2.getProcesses());
     		nf.beginSwapping();
     		avgNFProcess += (float)nf.getProcessCompleted();
     	}
     	
+	//WORST FIT HAS AN ISSUE
     	float avgWFProcess = 0;
     	for(int i = 0;i<5;i++){
+	    System.out.println("WORSTFIT");
     		Assignment4Tester generator3 = new Assignment4Tester(62);
     		WorstFit wf = new WorstFit(generator3.getProcesses());
     		wf.beginSwapping();
@@ -126,6 +132,7 @@ public class Assignment4Tester{
     	
     	float avgFIFOHitRatio = 0;
     	for (int i = 0;i<5;i++){
+	    System.out.println("FIFO");
     		Assignment4Tester generator4 = new Assignment4Tester(0);
     		FIFO fifo = new FIFO(generator4.getPages());
     		fifo.beginPaging();
@@ -134,6 +141,7 @@ public class Assignment4Tester{
      
     	float avgLFUHitRatio = 0;
     	for (int i = 0;i<5;i++){
+	    System.out.println("LFU");
     		Assignment4Tester generator4 = new Assignment4Tester(0);
     		LFU lfu = new LFU(generator4.getPages());
     		lfu.beginPaging();
@@ -141,6 +149,7 @@ public class Assignment4Tester{
     	}
     	float avgLRUHitRatio = 0;
     	for (int i = 0;i<5;i++){
+	    System.out.println("LRU");
     		Assignment4Tester generator4 = new Assignment4Tester(0);
     		LRU lru = new LRU(generator4.getPages());
     		lru.beginPaging();
@@ -149,6 +158,7 @@ public class Assignment4Tester{
    
     	float avgMFUHitRatio = 0;
     	for (int i = 0;i<5;i++){
+	    System.out.println("MFU");
     		Assignment4Tester generator5 = new Assignment4Tester(0);
     		MFU mfu = new MFU(generator5.getPages());
     		mfu.beginPaging();
@@ -157,6 +167,7 @@ public class Assignment4Tester{
     	
     	float avgRPHitRatio = 0;
     	for (int i = 0;i<5;i++){
+	    System.out.println("RP");
     		Assignment4Tester generator6 = new Assignment4Tester(0);
     		RandomPaging rp = new RandomPaging(generator6.getPages());
     		rp.beginPaging();
